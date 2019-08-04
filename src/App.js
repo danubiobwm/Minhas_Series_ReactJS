@@ -1,34 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Header from './component/Header';
 import Generos from './component/Generos';
 import Home from './component/Home';
-import axios from 'axios';
-import { BrowserRouter as Router, Route }  from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch }  from 'react-router-dom';
 import NovoGenero from './component/NovoGenero';
 import EditarGenero from './component/EditarGenero';
+import Serie from './component/Series';
+import NovaSerie from './component/NovaSerie';
+import InfoSerie from './component/InfoSerie';
 
 
 
 function App() {
 
-const [ data, setData ] = useState({});
 
-useEffect(()=>{
-  axios.get('/api').then(res =>{
-    setData(res.data);
-  });
-},[]);
 
   return (
     <Router>
     <div >
       <Header />
-      <Route path='/' exact component={Home} />
-      <Route path='/generos/:id' exact component={EditarGenero} />
-      <Route path='/generos/novo' exact component={NovoGenero} />
-      <Route path='/generos' exact  component={Generos} />
-      
-      <pre>{JSON.stringify(data)}</pre>
+      <Switch>
+        <Route path='/' exact component={Home} />
+        <Route path='/generos' exact  component={Generos} />
+        <Route path='/generos/novo' exact component={NovoGenero} />
+        <Route path='/generos/:id' exact component={EditarGenero} />
+        <Route path='/series' exact  component={Serie} />
+        <Route path='/series/novo' exact component={NovaSerie} />
+        <Route path='/series/:id' exact component={InfoSerie} />
+      </Switch>
+   
     
     </div>
     </Router>
